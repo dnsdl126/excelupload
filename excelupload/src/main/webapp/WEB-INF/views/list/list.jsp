@@ -43,8 +43,7 @@
 				<div class="col-sm-12">
 					<div class="row" id="regGoodsImgArea">
 						<div class="col-sm-4">
-						<label>엑셀업로드 (업로드하고 디비에 INSERT)</label>
-						<input id="excel" name="excel" class="file" type="file" multiple data-show-upload="false" data-show-caption="true"></input>
+							<input id="excel" class="file" type="file" multiple data-show-upload="false" data-show-caption="true"  ></input>
 						</div>
 					</div>
 				</div>
@@ -80,7 +79,45 @@
 </body>
 <script type="text/javascript">
 
-function check()
+
+
+  function check(e) {
+
+	  var fileInput = document.getElementById("excel"); //  input ajaxFile 이미지를 담음
+	  var files = fileInput.files; // 배열로 여러가지 이미지를 담음
+	  var file=files[0];  // 그중 첫번째만 가지고온다
+	   	 	
+	  var filefullname = fileInput.value; // 추가한 이미지의 이름 
+	  var fileform = filefullname.slice(filefullname.indexOf(".") + 1).toLowerCase() // input에 이미지 파일만 업로드 하도록 확장자 파일을 가지고옴   
+	   
+	  
+	  console.log(filefullname);
+	  
+	  
+	    if (file == "" || file == null) {
+	        alert("파일을 선택해주세요.");
+	        return false;
+	    } else if (filename != "xlsx" && filename != "xml") {
+	        alert("엑셀 파일만 업로드 가능합니다.");
+	        return false;
+	    }
+
+	    if (confirm("업로드 하시겠습니까?")) {
+	        var options = {
+	            success : function(data) {
+	                alert("모든 데이터가 업로드 되었습니다.");
+
+	            },
+	            type : "POST"
+	        };
+	        $("#excelUploadForm").ajaxSubmit(options);
+
+	    }
+	  
+	  
+   
+  }
+
 
 
 </script>	
