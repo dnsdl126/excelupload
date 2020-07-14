@@ -59,9 +59,9 @@ public class testcontroller {
 		log.info("컨트롤러 도착 ㄹ");
 		
 		MultipartFile excelFile = request.getFile("excelFile"); 
-		// org.springframework.web.multipart.commons.CommonsMultipartFile@3be434fd
 		
 		log.info("excelFile :" + excelFile);
+		//excelFile : org.springframework.web.multipart.commons.CommonsMultipartFile@3be434fd
 		 
 		if(excelFile == null || excelFile.isEmpty()) { // 파일 유무 확인
 	            throw new RuntimeException("엑셀파일을 선택해 주세요");
@@ -71,7 +71,7 @@ public class testcontroller {
 		
 		 
 		 try {
-	            //내가 설정한 위치에 내가 올린 파일을 만들고 
+	            //내가 설정한 위치에 내가 올린 파일을 만든다
 	            excelFile.transferTo(destFile);
 	         } catch(Exception e) {
 	            throw new RuntimeException(e.getMessage(),e);

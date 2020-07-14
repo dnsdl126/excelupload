@@ -21,8 +21,6 @@ public class testListDTO {
 	private int snum;
 	private String sname;
 	private String sgrade;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date sbirth;
 	private String school;
 	

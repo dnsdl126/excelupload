@@ -16,6 +16,7 @@ import com.excelupload.domain.testListDTO;
 import com.excelupload.persistence.testListDAO;
 
 import lombok.extern.slf4j.Slf4j;
+import utill.ExcelRead;
 import utill.ExcelReadOption;
 
 
@@ -33,6 +34,7 @@ public class testServiceImpl implements testService {
 		tDao = sqlSession.getMapper(testListDAO.class);
 	}
 	
+	//DB list 
 	public List<testListDTO> list() {
 		
 		log.info("서비스 진행");
@@ -41,6 +43,8 @@ public class testServiceImpl implements testService {
 
 	
 	
+	
+	//엑셀 업로드 
 	@Override
 	public void excelUpload(File destFile) {
 	
@@ -52,10 +56,26 @@ public class testServiceImpl implements testService {
 		excelReadOption.setFilePath(destFile.getAbsolutePath()); // 파일 실행 경로 
 		
 		 //추출할 컬럼명 추가
-        excelReadOption.setOutputColumns("A", "B", "C","D","E","F");
+        excelReadOption.setOutputColumns("A", "B", "C","D","E");
         
         //시작 행 
         excelReadOption.setStartRow(2);
+        
+        List<Map<String, String>>excelContent  = ExcelRead.read(excelReadOption); //ExcelRead 의 read는 static class 
+        
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+       
+        
+        paramMap.put("excelContent", excelContent);
+        
+        try {
+        	tDao.insertExcel(paramMap);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+       
 		
 	}
 

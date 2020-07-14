@@ -6,11 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType ="com.excelupload.domain.testListDTO">
 		select * from "testS200".school
 	</select>
+
 	
-	
-	 <insert id="insertDB" parameterType="java.util.Map">
-        INSERT INTO testTable(IDCOL, NAMECOL, VALUECOL)
-        VALUES(seq_id.nextval, #{NAMECOL}, #{VALUECOL})
+	 <insert id="insertExcel" parameterType="com.excelupload.domain.testListDTO">
+        INSERT INTO "testS200".school ( sname, sgrade, school ) 
+                VALUES 
+            <foreach collection="excelContent" item="item" separator=",">    
+                (#{item.B}, #{item.C}, #{item.E} )
+             </foreach>   
+                
+               
+              
+                
+                
+            
     </insert>
 
 

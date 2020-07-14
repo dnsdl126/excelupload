@@ -51,7 +51,7 @@ public class ExcelReadOption {
         for(String ouputColumn : outputColumns) {
             this.outputColumns.add(ouputColumn);
             
-            log.info( "이게뭘가" +this.outputColumns.add(ouputColumn)); // true;??? 
+          
         }
     }
  

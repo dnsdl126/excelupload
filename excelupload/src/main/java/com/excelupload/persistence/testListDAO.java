@@ -12,7 +12,10 @@ public interface testListDAO {
 	
 	public List<testListDTO> list();
 	
-	public int insertDB(Map<String, Object> map);
 
+	public void insertExcel(Map<String, Object> paramMap) throws Exception;
+	 
+	 
+	
 
 }
