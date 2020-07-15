@@ -18,7 +18,7 @@ import lombok.ToString;
 
 public class testListDTO {
 
-	private int snum;
+	private Integer snum;
 	private String sname;
 	private String sgrade;
 	private Date sbirth;

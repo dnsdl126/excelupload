@@ -37,7 +37,7 @@ public class ExcelCellRef {
             if( cell.getCellType() == Cell.CELL_TYPE_FORMULA ) {
                 value = cell.getCellFormula();
             }
-            else if( cell.getCellType() == Cell.CELL_TYPE_NUMERIC ) {
+            else if( cell.getCellType() == Cell.CELL_TYPE_NUMERIC ) { // return 값이 boolean
                 value = cell.getNumericCellValue() + "";
             }
             else if( cell.getCellType() == Cell.CELL_TYPE_STRING ) {

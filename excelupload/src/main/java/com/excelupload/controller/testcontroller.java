@@ -52,7 +52,7 @@ public class testcontroller {
 	}
 	
 	
-	@ResponseBody
+
 	@PostMapping("/excelupload")
 	public void excelupload(MultipartFile testFile, MultipartHttpServletRequest request) throws Exception  {
 		 

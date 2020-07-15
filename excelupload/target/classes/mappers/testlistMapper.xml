@@ -9,18 +9,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	
 	 <insert id="insertExcel" parameterType="com.excelupload.domain.testListDTO">
-        INSERT INTO "testS200".school ( sname, sgrade, school ) 
+        INSERT INTO "testS200".school ( snum, sname, sgrade, school ) 
                 VALUES 
             <foreach collection="excelContent" item="item" separator=",">    
-                (#{item.B}, #{item.C}, #{item.E} )
+                (nextval('seq_test') , #{item.B}, #{item.C}, #{item.E} )
              </foreach>   
                 
-               
-              
-                
-                
-            
-    </insert>
+ 	 </insert>
 
 
 </mapper>
