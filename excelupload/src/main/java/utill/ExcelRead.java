@@ -75,6 +75,7 @@ public class ExcelRead {
 				        			 // Row에서 cellIndex에 해당하는 Cell을 가지고 온다
 				        			 // 이름 예 : A, B, C 
 			        			 
+				        			
 					        			 if( !excelReadOption.getOutputColumns().contains(cellName) ) {
 					        				 // 추출 대상 컬럼인지 확인
 					        				 // 컬럼이 아닌경우 다시 for 시작

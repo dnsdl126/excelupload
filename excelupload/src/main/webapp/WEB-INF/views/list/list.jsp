@@ -65,7 +65,7 @@
 			<th>${list.snum}</th>
 			<th>${list.sname}</th>
 			<th>${list.sgrade}</th>
-			<th>${list.sbirth} </th>
+			<th><fmt:formatDate value="${list.sbirth}" pattern="yyyy-MM-dd"/></th>
 			<th>${list.school}</th>
 		</tr>
 		</c:forEach>
@@ -79,9 +79,24 @@
 
 
 
+
+
 function check() {
+	
 	var form = $("#excelUploadForm")[0];
+	var file = $('#excelUploadForm [name="excelFile"]').val(); /* C:\fakepath\extest.xlsx */
+	var stream = file.slice(file.indexOf(".") +1 ).toLowerCase();
 	 
+	 if (file == "" || file == null) {
+        alert("파일을 선택해주세요.");
+        return false;
+    } else if (stream != 'xls' && stream != 'xlsx') {
+        alert("엑셀 파일만 업로드 가능합니다.");
+        return false;
+    }
+
+
+	
     var data = new FormData(form);
     $.ajax({
        enctype:"multipart/form-data",
@@ -93,7 +108,8 @@ function check() {
        data: data,
        success: function(result){  
            alert("업로드 성공!!");
-       }
+           location.reload(); /* 자동 새로고침 */
+       } 
     });
 
 

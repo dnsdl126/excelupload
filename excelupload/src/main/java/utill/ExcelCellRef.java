@@ -1,6 +1,10 @@
 package utill;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.util.CellReference;
 
 public class ExcelCellRef {
@@ -38,9 +42,16 @@ public class ExcelCellRef {
                 value = cell.getCellFormula();
             }
             else if( cell.getCellType() == Cell.CELL_TYPE_NUMERIC ) { // return 값이 boolean
-                value = cell.getNumericCellValue() + "";
-            }
-            else if( cell.getCellType() == Cell.CELL_TYPE_STRING ) {
+            	if( DateUtil.isCellDateFormatted(cell)) {
+    					Date date = cell.getDateCellValue();
+    					value = new SimpleDateFormat("yyyy-MM-dd").format(date);
+
+    			} else {
+
+    					value = String.valueOf(cell.getNumericCellValue());
+
+    			}
+            } else if( cell.getCellType() == Cell.CELL_TYPE_STRING ) {
                 value = cell.getStringCellValue();
             }
             else if( cell.getCellType() == Cell.CELL_TYPE_BOOLEAN ) {

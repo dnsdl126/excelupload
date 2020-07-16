@@ -54,19 +54,11 @@ public class testcontroller {
 	
 
 	@PostMapping("/excelupload")
-	public void excelupload(MultipartFile testFile, MultipartHttpServletRequest request) throws Exception  {
+	public String excelupload(MultipartFile excelFile, MultipartHttpServletRequest request) throws Exception  {
 		 
-		log.info("컨트롤러 도착 ㄹ");
 		
-		MultipartFile excelFile = request.getFile("excelFile"); 
-		
-		log.info("excelFile :" + excelFile);
-		//excelFile : org.springframework.web.multipart.commons.CommonsMultipartFile@3be434fd
-		 
-		if(excelFile == null || excelFile.isEmpty()) { // 파일 유무 확인
-	            throw new RuntimeException("엑셀파일을 선택해 주세요");
-	        }
-		 
+		excelFile = request.getFile("excelFile"); 
+	
 		File destFile = new File("C:\\upload\\"+excelFile.getOriginalFilename()); // 경로 설정 
 		
 		 
@@ -79,6 +71,8 @@ public class testcontroller {
 	
 		 	tService.excelUpload(destFile); // 경로 가지고 이동 
 		 	
+		 	return "list/list";
 	}
+	
 	
 }

@@ -3,16 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.excelupload.persistence.testListDAO">
-	<select id="list" resultType ="com.excelupload.domain.testListDTO">
+	<select id="list" resultType ="testListDTO">
 		select * from "testS200".school
 	</select>
 
 	
-	 <insert id="insertExcel" parameterType="com.excelupload.domain.testListDTO">
+	 <insert id="insertExcel" parameterType="testListDTO">
         INSERT INTO "testS200".school ( snum, sname, sgrade, school ) 
                 VALUES 
             <foreach collection="excelContent" item="item" separator=",">    
-                (nextval('seq_test') , #{item.B}, #{item.C}, #{item.E} )
+                (nextval('seq_test2') , #{item.B}, #{item.C}, #{item.E} )
              </foreach>   
                 
  	 </insert>
