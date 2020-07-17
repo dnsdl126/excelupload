@@ -35,17 +35,12 @@ public class testServiceImpl implements testService {
 		tDao = sqlSession.getMapper(testListDAO.class);
 	}
 	
-	
 	//DB list 
 	public List<testListDTO> list() {
-		
 		log.info("서비스 진행");
 		return tDao.list();
 	}
 
-	
-	
-	
 	//엑셀 업로드 
 	@Override
 	public void excelUpload(File destFile) {
@@ -56,8 +51,7 @@ public class testServiceImpl implements testService {
 		
 		//파일경로 추가
 		excelReadOption.setFilePath(destFile.getAbsolutePath()); // 파일 실행 경로 
-		
-		
+	
 		 //추출할 컬럼명 추가
         excelReadOption.setOutputColumns("A", "B", "C","D","E");
         
@@ -68,7 +62,6 @@ public class testServiceImpl implements testService {
         
         Map<String, Object> paramMap = new HashMap<String, Object>();
        
-        
         paramMap.put("excelContent", excelContent);
         
         try {
@@ -76,14 +69,5 @@ public class testServiceImpl implements testService {
         }catch(Exception e) {
             e.printStackTrace();
         }
-        
-        
-       
-		
 	}
-
-	
-
-	
-
 }

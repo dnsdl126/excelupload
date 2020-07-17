@@ -1,22 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../include/include.jsp"%> 
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>학생 테이블 </title>
 </head>
 <style type="text/css">
-	
-
 
 	table {
 		width : 500px;
 		height: 80px;
 		margin: auto; 
 	}
-
-
 	table, th, td {
 		border : 1px solid black;
 		text-align: center;
@@ -40,9 +37,7 @@
 		<div class="col-lg-10 well" style="width: 500px; margin: auto;">
 			<div class="row">
 			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"  >
-				
 				<input id="excelFile" type="file" name="excelFile" /></input>
-					
 				<button type="button" id="excelUp" onclick="check()">등록</button>
 			</form>
 			</div>
@@ -50,8 +45,7 @@
 	<!-- END container -->
 	</div>
 	<!-- END CONTENT BODY -->
-</div>
-		
+</div>	
 	<table >
 		<tr >
 			<th>번호</th>
@@ -69,17 +63,10 @@
 			<th>${list.school}</th>
 		</tr>
 		</c:forEach>
-
 	</table>
-
 </body>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript">
-
-
-
-
-
 
 function check() {
 	
@@ -93,9 +80,7 @@ function check() {
     } else if (stream != 'xls' && stream != 'xlsx') {
         alert("엑셀 파일만 업로드 가능합니다.");
         return false;
-    }
-
-
+	}
 	
     var data = new FormData(form);
     $.ajax({
@@ -111,15 +96,7 @@ function check() {
            location.reload(); /* 자동 새로고침 */
        } 
     });
-
-
 }
-
-
-
-
-
-
 
 </script>	
 </html>

@@ -51,8 +51,6 @@ public class testcontroller {
 		return "list/list";
 	}
 	
-	
-
 	@PostMapping("/excelupload")
 	public String excelupload(MultipartFile excelFile, MultipartHttpServletRequest request) throws Exception  {
 		 
@@ -73,6 +71,4 @@ public class testcontroller {
 		 	
 		 	return "list/list";
 	}
-	
-	
 }

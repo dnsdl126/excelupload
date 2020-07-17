@@ -1,8 +1,5 @@
 package com.excelupload.domain;
 
-
-
-
 import java.util.Date;
 
 import lombok.AllArgsConstructor;

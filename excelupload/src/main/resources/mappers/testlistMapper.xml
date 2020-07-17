@@ -6,8 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType ="testListDTO">
 		select * from "testS200".school
 	</select>
-
-	
+    
 	 <insert id="insertExcel" parameterType="testListDTO">
         INSERT INTO "testS200".school ( snum, sname, sgrade, school ) 
                 VALUES 
