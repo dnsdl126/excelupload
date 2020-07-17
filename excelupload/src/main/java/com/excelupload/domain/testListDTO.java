@@ -3,6 +3,7 @@ package com.excelupload.domain;
 
 
 
+
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ import lombok.ToString;
 
 public class testListDTO {
 
-	private Integer snum;
+	private String snum;
 	private String sname;
 	private String sgrade;
 	private Date sbirth;
