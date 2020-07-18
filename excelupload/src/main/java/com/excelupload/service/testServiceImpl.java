@@ -58,7 +58,7 @@ public class testServiceImpl implements testService {
         //시작 행 
         excelReadOption.setStartRow(2);
         
-        List<Map<String, String>>excelContent  = ExcelRead.read(excelReadOption); //ExcelRead 의 read는 static class 
+        List<Map<String, Object>>excelContent  = ExcelRead.read(excelReadOption); //ExcelRead 의 read는 static class 
         
         Map<String, Object> paramMap = new HashMap<String, Object>();
        

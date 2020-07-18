@@ -1,12 +1,10 @@
 package com.excelupload.domain;
 
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> origin/mergeTest
+
 import java.util.Date;
 
 import lombok.AllArgsConstructor;

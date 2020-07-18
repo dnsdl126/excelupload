@@ -6,12 +6,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType ="testListDTO">
 		select * from "testS200".school
 	</select>
-
-	
+    
 	 <insert id="insertExcel" >
         INSERT INTO "testS200".school ( snum, sname, sgrade, sbirth, school ) 
                 VALUES 
-            <foreach collection="excelContent" item="item" separator=",">    
+             <foreach collection="excelContent" item="item" separator=",">    
                 (#{item.A} , #{item.B}, #{item.C}, #{item.D}, #{item.E} )
              </foreach>   
                 

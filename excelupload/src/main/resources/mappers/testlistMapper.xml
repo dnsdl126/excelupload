@@ -6,18 +6,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType ="testListDTO">
 		select * from "testS200".school
 	</select>
-<<<<<<< HEAD
     
-	 <insert id="insertExcel" parameterType="testListDTO">
-        INSERT INTO "testS200".school ( snum, sname, sgrade, school ) 
-=======
-
-	
 	 <insert id="insertExcel" >
         INSERT INTO "testS200".school ( snum, sname, sgrade, sbirth, school ) 
->>>>>>> origin/mergeTest
                 VALUES 
-            <foreach collection="excelContent" item="item" separator=",">    
+             <foreach collection="excelContent" item="item" separator=",">    
                 (#{item.A} , #{item.B}, #{item.C}, #{item.D}, #{item.E} )
              </foreach>   
                 

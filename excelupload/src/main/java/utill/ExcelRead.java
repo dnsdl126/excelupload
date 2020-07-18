@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ExcelRead {
-	 public static List<Map<String, String>> read(ExcelReadOption excelReadOption) { 
+	 public static List<Map<String, Object>> read(ExcelReadOption excelReadOption) { 
 		 
 		 
 	        Workbook wb = ExcelFileType.getWorkbook(excelReadOption.getFilePath());
@@ -40,7 +40,7 @@ public class ExcelRead {
 	        // putt("A", "이름"); 같은 형식
 	        
 	        
-	        List<Map<String, String>> result = new ArrayList<Map<String, String>>(); 
+	        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(); 
 	        // 각 Row를 리스트에 담는다
 	        // 하나의 Row는 하나의 Map으로 표현 
 	        // List에는 모든 Row를 담는다
@@ -89,28 +89,50 @@ public class ExcelRead {
 					        		        
 					        		    	case Cell.CELL_TYPE_NUMERIC:
 					        		            if (DateUtil.isCellDateFormatted(cell)) {
-					        		                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-					        		                map.put(cellName, dateFormat.format(cell.getDateCellValue()));
-					        		            } else {
-					        		            	 map.put(cellName, Integer.toString(cell.getNumericCellValue();
+					        		                //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					        		                map.put(cellName, cell.getDateCellValue()); //날짜 형식 (엑셀 셀형식 날짜로 되어있어야한다 )
 					        		                
+					        		                //log.info("Date :" + cell.getDateCellValue());
+					        		                break;
+					        		            } else {
+					        		            	
+					        		            	//log.info("int : " + Integer.toString((int)cell.getNumericCellValue()));
+					        		            	 map.put(cellName, new Double(cell.getNumericCellValue()).intValue()); 
+					        		            	 //intValue() : Integer객체에서 int 형 값을 추출
+					        		            	 //parseint() : String형 객체에서 int형 값 추출  
+					        		            	 
+					        		            	 // double 은 기본 형 Double은 wrapper class 
+					        		            	 // 반환으로 int 형이 필요하다 colum은 Integer 로 되어있지만
+					        		            	 // postgresql dataType : Integer == java dataType : int
+					        		            	 // 반환으로 int가 들어가 야 한다
+					        		            	 // map 의 value 가 object type 으로 선언 했는데
+					        		            	 // object type의 변수는 객체자료형만 표현이 가능 하므로
+					        		            	 // int, double 등의 기본자료형 불가
+					        		            	 // Wrapper 클래스를 사용하여 객체자료형으로 변환해야 한다 
+					        		           
+					        		            	 
+					        		            	 
+					        		            	 break;
+
 					        		            }
 					        		            
 					        		        case Cell.CELL_TYPE_STRING:
 					        		            map.put(cellName, cell.getStringCellValue());
-					        		       
+					        		            break;
 					        		        case Cell.CELL_TYPE_BLANK:
 					        		            map.put(cellName, "");
+					        		            break;
 					        		        case Cell.CELL_TYPE_ERROR:
-					        		            map.put(cellName, String.valueOf(cell.getErrorCellValue());
-					        		        
+					        		            map.put(cellName, String.valueOf(cell.getErrorCellValue()));
+					        		            break;
 					        		        default : 
 					        		            map.put(cellName, cell.getStringCellValue());
+					        		            break;
 					        		    } 
 			        			 
 					        			 
 					        			 
-			        			 map.put(cellName, ExcelCellRef.getValue(cell));
+			        			 //map.put(cellName, ExcelCellRef.getValue(cell));
 			        			 // map의 객체의 cell 이름을 key로 데이터 담음
 			        			 
 			        		 }
