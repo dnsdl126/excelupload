@@ -1,11 +1,13 @@
 package utill;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -33,7 +35,7 @@ public class ExcelRead {
 	        String cellName = "";
 	        
 	        
-	        Map<String, String> map = null;
+	        Map<String, Object> map = null;
 	        // 각 row 마다 값을 저장할 맵 객체
 	        // putt("A", "이름"); 같은 형식
 	        
@@ -65,7 +67,7 @@ public class ExcelRead {
 			        		numOfcells = row.getLastCellNum();
 			        		//가져온 row의 셀 개수 
 			        		
-			        		map = new HashMap<String, String>();
+			        		map = new HashMap<String, Object>();
 			        		// 데이터를 담을 맵 객체
 			        		
 			        		for(int cellIndex = 0; cellIndex < numOfcells; cellIndex++) {
@@ -81,7 +83,33 @@ public class ExcelRead {
 					        				 // 컬럼이 아닌경우 다시 for 시작
 					        				 continue;
 					                        }
+					        			 
+					        			 
+					        			 switch (cell.getCellType()) { // 각 셀에 담겨있는 데이터의 타입을 체크하고, 해당 타입에 맞게 가져온다.
+					        		        
+					        		    	case Cell.CELL_TYPE_NUMERIC:
+					        		            if (DateUtil.isCellDateFormatted(cell)) {
+					        		                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					        		                map.put(cellName, dateFormat.format(cell.getDateCellValue()));
+					        		            } else {
+					        		            	 map.put(cellName, Integer.toString(cell.getNumericCellValue();
+					        		                
+					        		            }
+					        		            
+					        		        case Cell.CELL_TYPE_STRING:
+					        		            map.put(cellName, cell.getStringCellValue());
+					        		       
+					        		        case Cell.CELL_TYPE_BLANK:
+					        		            map.put(cellName, "");
+					        		        case Cell.CELL_TYPE_ERROR:
+					        		            map.put(cellName, String.valueOf(cell.getErrorCellValue());
+					        		        
+					        		        default : 
+					        		            map.put(cellName, cell.getStringCellValue());
+					        		    } 
 			        			 
+					        			 
+					        			 
 			        			 map.put(cellName, ExcelCellRef.getValue(cell));
 			        			 // map의 객체의 cell 이름을 key로 데이터 담음
 			        			 

@@ -32,43 +32,31 @@ public class ExcelCellRef {
  
     @SuppressWarnings("deprecation")
     public static String getValue(Cell cell) {
-        String value = "";
- 
-        if(cell == null) {
-            value = "";
-        }
-        else {
-            if( cell.getCellType() == Cell.CELL_TYPE_FORMULA ) {
-                value = cell.getCellFormula();
+    	
+    	switch (cell.getCellType()) { // 각 셀에 담겨있는 데이터의 타입을 체크하고, 해당 타입에 맞게 가져온다.
+        
+    	case Cell.CELL_TYPE_NUMERIC:
+            if (DateUtil.isCellDateFormatted(cell)) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                return dateFormat.format(cell.getDateCellValue());
+            } else {
+               
+            	return String.valueOf(cell.getNumericCellValue());
+                
             }
-            else if( cell.getCellType() == Cell.CELL_TYPE_NUMERIC ) { // return 값이 boolean
-            	if( DateUtil.isCellDateFormatted(cell)) {
-    					Date date = cell.getDateCellValue();
-    					value = new SimpleDateFormat("yyyy-MM-dd").format(date);
-
-    			} else {
-
-    					value = String.valueOf(cell.getNumericCellValue());
-
-    			}
-            } else if( cell.getCellType() == Cell.CELL_TYPE_STRING ) {
-                value = cell.getStringCellValue();
-            }
-            else if( cell.getCellType() == Cell.CELL_TYPE_BOOLEAN ) {
-                value = cell.getBooleanCellValue() + "";
-            }
-            else if( cell.getCellType() == Cell.CELL_TYPE_ERROR ) {
-                value = cell.getErrorCellValue() + "";
-            }
-            else if( cell.getCellType() == Cell.CELL_TYPE_BLANK ) {
-                value = "";
-            }
-            else {
-                value = cell.getStringCellValue();
-            }
-        }
- 
-        return value;
+            
+        case Cell.CELL_TYPE_STRING:
+            return cell.getStringCellValue();
+       
+        case Cell.CELL_TYPE_BLANK:
+            return "";
+        
+        case Cell.CELL_TYPE_ERROR:
+            return String.valueOf(cell.getErrorCellValue());
+        
+        default : 
+            return cell.getStringCellValue();
+    }
+}
     }
 
-}
