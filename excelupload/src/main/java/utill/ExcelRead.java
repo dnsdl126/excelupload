@@ -109,7 +109,6 @@ public class ExcelRead {
 					        		            	 // object type의 변수는 객체자료형만 표현이 가능 하므로
 					        		            	 // int, double 등의 기본자료형 불가
 					        		            	 // Wrapper 클래스를 사용하여 객체자료형으로 변환해야 한다 
-					        		            	 //확인 
 					        		            	 
 					        		            	 
 					        		            	 break;
